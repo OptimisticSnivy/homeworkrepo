@@ -1,10 +1,10 @@
-def recbs(arr,l,h,key):
+def iterbs(arr,l,h,key):
     storarr=[i[0] for i in arr]
     while(h-l>1):
-        print('1')
         mid=int((l+h)/2)
         if(key==storarr[mid]):
             return mid
+            break
         elif(storarr[mid]<key):
             l=mid+1
         elif(storarr[mid]<key):
@@ -24,7 +24,8 @@ for i in range(n):
 print("<---------------------------------------------------------->")
 srch=input("Enter the name to be searched=")
 
-result1=recbs(ls1,0,n,srch)
+result1=iterbs(ls1,0,n,srch)
+print(result1)
 print("<---------------------------------------------------------->")
 if(result1==False):
     col1=[]

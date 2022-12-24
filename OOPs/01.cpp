@@ -6,18 +6,18 @@ private:
     int real;
     int img;
 public:
-    complex(){
-        real=0;
+    complex(){                                              //default constructor
+        real=0;                             
         img=0;
-    
+        
     }
     
-    complex(int r,int i){
+    complex(int r,int i){                                   //PARAMETRIZED constructor
         real=r;
         img=i;
     }
 
-    complex operator + (complex a){
+    complex operator + (complex a){                 
         complex result;
         result.real=real+a.real;
         result.img=img+a.img;

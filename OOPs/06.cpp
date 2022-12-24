@@ -22,7 +22,6 @@ bool compareByName(const Item &a, const Item &b)
 
 int main()
 {
-  int n;    
   // Create a vector of item records
   vector<Item> items;
 
@@ -37,8 +36,7 @@ int main()
   sort(items.begin(), items.end(), compareByName);
 
   cout << "Sorted item records:" << endl;
-  n=items.size();
-  for (i=0;i<n;i++)
+  for (const auto &item : items)
   {
     cout << "Name: " << item.name << ", Quantity: " << item.quantity << ", Price: $" << item.price << endl;
   }

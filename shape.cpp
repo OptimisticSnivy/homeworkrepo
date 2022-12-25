@@ -1,6 +1,6 @@
 #include<graphics.h>
 #include<iostream>
-#include <winbgim.h>
+#include <cmath>
 using namespace std;
 
 class shapes{
@@ -38,7 +38,6 @@ void circl(int xc,int yc,int r){
      int x=0;
      int y=r;
 	 float dp=3-2*r;
-     symmetry(xc,yc,x,y);
 	 while(y>=x){
 	 	x=x+1;
 	 	if(dp<0){
@@ -53,17 +52,30 @@ void circl(int xc,int yc,int r){
 };
 int main()  
 {  
-int gdriver = 9;
-int gmode = 2;
+	int gdriver = 9;
+	int gmode = 2;
+	int sqrt1=50*(sqrt(2))
 initgraph(&gdriver,&gmode, NULL);
     shapes a;
-    a.circl(200,200,200);
-    a.circl(200,200,100);
-    a.drawline(27,300,373,300);
-    a.drawline(27,300,200,0);
-    a.drawline(373,300,200,0);
-//    a.drawline(28,300,200,0);
-//    a.drawline(375,300,200,0);
+    //a.circl(200,200,200);
+    //a.circl(200,200,100);
+    //a.drawline(27,300,373,300);
+    //a.drawline(27,300,200,0);
+    //a.drawline(373,300,200,0);
+	//a.drawline(28,300,200,0);
+	//a.drawline(375,300,200,0);
     
-    delay(100000);
+	a.drawline(100,0,100,100);
+	a.drawline(100,100,200,100);
+	a.drawline(200,100,200,0);
+	a.drawline(200,0,100,0);
+		
+	a.drawline(100,50,150,100);
+	a.drawline(150,100,200,50);
+	a.drawline(200,50,150,0);
+	a.drawline(150,0,100,50);	
+
+	a.circl(150,50,sqrt1/2);
+    
+	delay(100000);
 }  

@@ -1,60 +1,45 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
-const int Max = 10;
-class queue
-{
-private:
-    int arr[Max];
-    int front, rear;
-
+class queue{
+    int arr[25];
+    int front;
+    int rear;
+    int size;
 public:
-    queue()
+    queue(){
+        front=0;
+        rear=0;      
+    }  
+
+    void addjob(int ele)
     {
-        front = -1;             //constructor
-        rear = -1;
+        if(rear==size){
+            cout<<"Queue is full!"<<endl;
+        }
+        else{
+            arr[rear]=ele;
+            rear++;
+        }
     }
-    void addq(int ele);
-    int delq();
-    void display();
-};
-void queue::addq(int ele)
-{
-    if (rear == Max - 1)
+    int finishjob(){
+        if(front==rear){
+            cout<<"No Jobs left to be Done!"<<endl;
+            return -1;
+        }
+        else{
+            int ans=arr[front];
+            arr[front]=-1;
+            front++;
+            if(front==rear){                            //if popped the only left element
+                front=0;            
+                rear=0;
+            }
+        return ans;
+        }
+    }
+    void display()
     {
-        cout << "\n Queue is full \n"
-             << endl;
-        return;
-    }
-    rear++;
-    arr[rear] = ele;
-    if (front == -1)
-    {
-        front = 0;
-    }
-}
-int queue::delq()
-{
-    if (front == -1)
-    {
-        cout << "\n Queue is empty \n"
-             << endl;
-        return -1;
-    }
-    int value = arr[front];
-    arr[front] = 0;
-    if (front == rear)
-    {
-        front = rear = -1;
-    }
-    else
-    {
-        front++;
-    }
-    return value;
-}
-void queue::display()
-{
-    if (front == -1 && rear == -1)
+    if (front == 0 && rear == 0)
     {
         cout << "Queue is empty. \n";
     }
@@ -67,6 +52,10 @@ void queue::display()
         cout << "\n";
     }
 }
+
+
+};
+
 int main()
 {
     queue q;
@@ -80,11 +69,11 @@ int main()
         case 1:
             cout << "Enter data:";
             cin >> ele;
-            q.addq(ele);
+            q.addjob(ele);
             break;
         case 2:
             int n;
-            n = q.delq();
+            n = q.finishjob();
             if (n != -1)
             {
                 cout << "deleted job:" << n;

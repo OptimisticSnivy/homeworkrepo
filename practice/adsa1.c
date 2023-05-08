@@ -5,18 +5,78 @@ to  reach  city  B  from  A,  or  the  amount  of  fuel  used  for  the  journey
 graph. The node can be represented by airport name or name of the city. Use adjacency 
 list  representation  of  the  graph  or  use  adjacency  matrix  representation  of  the  graph. 
 Check whether the graph is connected or not. Justify the storage representation used. */
+
 #include<iostream>
-#define max 50
 using namespace std;
 
 class adjmtx{
 private:
-    int matrix[max];
-    int a,b;
+   int m,n;
 public:
-    adjmtx(m,n){
-        a=m;
-        b=n;   
-    }
+   adjmtx(int a,int b){
+      m=a;
+      n=b;
+      int **arr=new int*[m];
+      for(int i=0;i<m;i++){
+         arr[i]=new int[n];
+      }
+   }  
+
+   void display(){
+      adjmtx s(4,4);
+      for(int i=0;i<s.m;i++){
+         
+         
+      }
+   }
 
 };
+int main()
+{
+
+   return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,24 +12,21 @@ using namespace std;
 class adjMatrix{
 private:
   int m,n;
-  int** arr=new int*[m];
+  int* arr=new int[m*n];
 public:
   adjMatrix(int a,int b){
     m=a;
     n=b;
     for(int i=0;i<m;i++){
-      arr[i]=new int[n];
-    }
-    for(int i=0;i<m;i++){
       for(int j=0;j<n;j++){
-        arr[i][j]=0;
+        *(arr+i*n+j)=0;
       }
     } 
   }
   void display(){
     for (int i=0;i<m;i++){
       for(int j=0;j<n;j++){
-        cout<<arr[i][j]<<"";
+        cout<<*(arr+i*n+j)<<"";
       }
       cout<<endl;
     }
@@ -42,7 +39,3 @@ int main(int argc, char *argv[])
   flights.display();
   return 0;
 }
-
-
-
-

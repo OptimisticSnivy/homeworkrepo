@@ -24,14 +24,14 @@ class hashTable:
            else:                    
             print("Inserting...")
     
-    def search_quadratic_probing(self,key,value):
-        index=self.hashFunction(key)
-        for i in range(0,self.size):
-           if((key,value)==self.table[(index+(i*i))%self.size]):
-            print("Entry Found! ",self.table[(index+(i*i)%self.size)])
-            break
-           else:                    
-            print("Searching...")
+    def search_linear_probing(self, key):
+        index = self.hashFunction(key)
+        for i in range(0, self.size):
+            if self.table[(index+i) % self.size] != [] and self.table[(index+i) % self.size][0][0] == key:
+                print("Entry Found! ", self.table[(index+i) % self.size])
+                break
+            else:
+                print("Searching...")
 
 telephone_book = {
     "John Doe": 1234567899,
@@ -46,5 +46,5 @@ hashTable1 = hashTable(10)
 for name, number in telephone_book.items():
     hashTable1.insert_quadratic_probing(number,name)
 
-hashTable1.search_quadratic_probing(1234567899,"John Doe")
+hashTable1.search_linear_probing(1234567899)
 print(hashTable1.table)

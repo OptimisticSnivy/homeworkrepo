@@ -12,7 +12,6 @@ public:
     this->left=NULL;
     this->right=NULL;
   }
-
 };
 
 void inorder(node* root){

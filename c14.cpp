@@ -1,41 +1,47 @@
-
 #include <iostream>
-#include <unordered_map>
-#include <list>
-#include <string>
+#include<string>
+using namespace std;
 
-// Edge structure to represent a flight path
-struct Edge {
-    std::string destination;
-    int cost;
+const int MAX_CITIES = 100; // Maximum number of cities
 
-    Edge(const std::string& dest, int c)
-        : destination(dest), cost(c) {}
+struct flightname{
+  int serialNumber;
+  string cityName;
 };
 
-// Graph class using adjacency list representation
+
 class Graph {
 private:
-    std::unordered_map<std::string, std::list<Edge>> adjacencyList;
+    int adjacencyMatrix[MAX_CITIES][MAX_CITIES];
+    int numCities;
 
 public:
-    // Function to add an edge between cities
-    void addEdge(const std::string& source, const std::string& destination, int cost) {
-        adjacencyList[source].push_back(Edge(destination, cost));
+    Graph(int numCities) {
+        this->numCities = numCities;
+
+        // Initialize the adjacency matrix with zeros
+        for (int i = 0; i < numCities; ++i) {
+            for (int j = 0; j < numCities; ++j) {
+                adjacencyMatrix[i][j] = 0;
+            }
+        }
     }
 
-    // Function to check if the graph is connected
+    void addFlight(int cityA, int cityB, int cost) {
+        // Update the adjacency matrix with the cost of the flight
+        adjacencyMatrix[cityA][cityB] = cost;
+        adjacencyMatrix[cityB][cityA] = cost; // Assuming flights are bidirectional
+    }
+
     bool isConnected() {
-        if (adjacencyList.empty()) {
-            return true; // Empty graph is considered connected
-        }
+        bool visited[MAX_CITIES] = {false};
 
-        std::unordered_map<std::string, bool> visited;
-        dfs(adjacencyList.begin()->first, visited);
+        // Perform a depth-first search (DFS) to check connectivity
+        dfs(0, visited);
 
-        // Check if all nodes were visited
-        for (const auto& node : adjacencyList) {
-            if (!visited[node.first]) {
+        // If any city is not visited, the graph is not connected
+        for (int i = 0; i < numCities; ++i) {
+            if (!visited[i]) {
                 return false;
             }
         }
@@ -43,32 +49,32 @@ public:
         return true;
     }
 
-private:
-    // Depth-first search (DFS) to visit all connected nodes
-    void dfs(const std::string& node, std::unordered_map<std::string, bool>& visited) {
-        visited[node] = true;
+    void dfs(int city, bool visited[]) {
+        visited[city] = true;
 
-        for (const auto& edge : adjacencyList[node]) {
-            if (!visited[edge.destination]) {
-                dfs(edge.destination, visited);
+        for (int neighbor = 0; neighbor < numCities; ++neighbor) {
+            if (adjacencyMatrix[city][neighbor] > 0 && !visited[neighbor]) {
+                dfs(neighbor, visited);
             }
         }
     }
 };
 
 int main() {
-    // Create a graph
-    Graph flightGraph;
-
-    // Add flight paths
-    flightGraph.addEdge("City A", "City B", 2);
-    flightGraph.addEdge("City B", "City C", 1);
-    flightGraph.addEdge("City C", "City D", 3);
-    flightGraph.addEdge("City D", "City E", 2);
-    flightGraph.addEdge("City E", "City F", 1);
+    // Create a graph with 4 cities
+    Graph graph(4);
+    flightname a;
+    a.cityName="PUNE";
+    a.serialNumber=0;
+    // Add flights between cities with their respective costs
+    graph.addFlight(0, 1, 5);
+    graph.addFlight(a.serialNumber, 2, 3);
+    graph.addFlight(1, 2, 2);
+    graph.addFlight(1, 3, 4);
+    graph.addFlight(2, 3, 6);
 
     // Check if the graph is connected
-    if (flightGraph.isConnected()) {
+    if (graph.isConnected()) {
         std::cout << "The graph is connected." << std::endl;
     } else {
         std::cout << "The graph is not connected." << std::endl;
